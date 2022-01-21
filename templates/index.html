@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top rounded">
+    <a class="navbar-brand" href="{{url_for('home')}}">MiNuevaPC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('home')}}" disabled>Home <span class="sr-only">(current)</span> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('cotiza')}}">Cotiza</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron rounded" > 
+    <h1 class="display-1">Bienvenido</h1>
+    <div >    
+        <p class="lead">MY NEW COMPUTER</p>
+        <p>Sé que estas buscando armar o comprar tu nueva computadora, espero ayudarte con presupuestarla, pondrás los links de los productos que deseas
+            comprar y te devolveré el precio tanto con pago en tarjeta de crédito/débito como en efectivo para que puedas estar más seguro.
+        </p>
+        <a class="btn btn-outline-success btn-lg btn-block" href="{{url_for('cotiza')}}" role="button" >VAMOS</a>
+        <p>-Mr8ug</p>
+    </div>
+</div>
+
+
+{% endblock %}

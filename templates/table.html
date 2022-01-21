@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top rounded">
+    <a class="navbar-brand" href="{{url_for('home')}}">MiNuevaPC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('home')}}" disabled>Home <span class="sr-only">(current)</span> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('cotiza')}}">Cotiza</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+  <div class="card border-success mb-3 bg-light mb-3" style="margin: 75px 25px 25px 25px;">
+    <div class="card-header bg-success mb-3">
+      <p class="display-4 text-white font-weight-bold text-monospace" style="text-align: center;">COMPONENTES</p>
+    </div>
+    <div class="card-body table-responsive">
+      <table id="data"  class="table table-bordered  table-striped">
+        <thead class="thead-dark">
+          <tr class="font-weight-bold" style="text-align: center;">
+            <th>Tienda</th>
+            <th>Producto</th>
+            <th>Imagen</th>
+            <th>Cantidad</th>
+
+            <th>Precio Normal</th>
+            <th>SubTotal Precio Normal</th>
+            <th>Precio Efectivo/Descuento</th>
+            <th>SubTotal Precio Efectivo/Descuento</th>
+            
+            <th>Descuento</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in productos %}
+            <tr style="text-align: center;">
+              <td>{{ p.tienda }}  </td>
+              <td>{{ p.producto }} <a href={{p.link}}>URL Producto</a></td>
+              <td><img src={{p.imagen}} style="background-position: center center; height:75px;"></td>
+              <td>{{ p.cantidad }}</td>
+              <td>Q{{ p.precion }}</td>
+              <td>Q{{ p.subtotaln }}</td>
+              <td>Q{{ p.precioe }}</td>
+              <td>Q{{ p.subtotale }}</td>
+              <td>-Q{{ p.descuento }}</td>
+              
+            </tr>
+          {% endfor %}
+          <tr class="bg-success font-weight-bold text-white" style="text-align: center;">
+            <td>-- TOTAL --</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Precio Normal</td>
+            <td>Q{{precioNormal}}</td>
+            <td>Precio Efectivo/Descuento</td>
+            <td>Q{{precioEfectivo}}</td>
+            <td>-Q{{precioDescuento}}</td>
+          </tr>
+        </tbody>
+        
+      </table>
+      <a class="btn btn-outline-primary center align-center" type="submit" id="print" onclick="window.print();" role="button" >Imprimir Informacion</a>
+      <p>Si el contenido de la tabla no se ajusta a la hoja de impresion, ajuste la escala de impresion aprox. 80% </p>
+    </div>
+    <div >
+      <p class="card-text">
+        **Tomar nota que los precios en efectivo de IMEQMO son los mismos precios tanto como pago en tarjeta como en efectivo sin recargo por medio de la pagina en linea,
+        el Precio Normal mostrado es el precio sin descuento
+      </p>
+
+      <hr class="my-4">
+
+    </div>
+    
+  </div>
+
+  <div class="card" style="margin: 15px 25px 25px 25px;">
+    <div class="card-header"><h1>Presupuesto</h1></div>
+    <div class="card-body">
+      <p>Precio Normal: Q {{precioNormal}}</p>
+      <p>Precio Efectivo: Q {{precioEfectivo}}</p>
+      <p>Ahorro Efectivo: Q {{precioDescuento}}</p>
+      
+    </div>
+    
+
+  </div>
+
+  <div>
+
+  </div>
+{% endblock %}
