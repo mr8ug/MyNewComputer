@@ -16,7 +16,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
   
-app = Flask(__name__) #creating the Flask class object   
+app = Flask(__name__, template_folder='templates') #creating the Flask class object   
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -115,7 +115,9 @@ try:
 
     #arranque de app
     if __name__ =='__main__':  
-        app.run(debug = True)  
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0',port=port)
+        app.run(debug=True)
 
 except Exception as err:
     print('Error: {0} >'.format(err))
