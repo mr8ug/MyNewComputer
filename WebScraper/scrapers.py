@@ -45,7 +45,7 @@ class intelaf_Scraper():
         img = html.find('div',class_="col-xs-12 col-md-6")
         img = img.attrs['style'].split("url(\"")
         img = img[1].split(".jpg\");")
-        self.imagen = str("https://www.intelaf.com/"+img[0]+'.jpg')
+        self.imagen = str("http://www.intelaf.com/"+img[0]+'.jpg')
 
     def getProducto(self):
         self.getData()
@@ -106,7 +106,7 @@ class imeqmo_Scraper():
 
         img = html.find('img', class_="img img-fluid product_detail_img")
         img = img.attrs['src'].replace("\"","")
-        self.imagen = str("https://www.imeqmo.com" + str(img))
+        self.imagen = str("http://www.imeqmo.com" + str(img))
 
 
         
@@ -188,17 +188,17 @@ class macrosistemas_Scraper():
 
 
 #print("\nINTELAF")
-#intelaf = intelaf_Scraper("https://www.intelaf.com/precios_stock_detallado.aspx?codigo=CAM-NXT-SMW4U2", "2")
+#intelaf = intelaf_Scraper("http://www.intelaf.com/precios_stock_detallado.aspx?codigo=CAM-NXT-SMW4U2", "2")
 #dataIntelaf = intelaf.getProducto()
 #print(dataIntelaf['nombre'], dataIntelaf['precion'], dataIntelaf['precioe'], dataIntelaf['imagen'])
 
 
 #print("\nIMEQMO")
-#imeqmo = imeqmo_Scraper("https://www.imeqmo.com/shop/product/bx8070110100f-procesador-intel-core-i3-10100f-3-6ghz-10th-gen-13250?category=11", "2")
+#imeqmo = imeqmo_Scraper("http://www.imeqmo.com/shop/product/bx8070110100f-procesador-intel-core-i3-10100f-3-6ghz-10th-gen-13250?category=11", "2")
 #dataImeqmo = imeqmo.getProducto()
 #print(dataImeqmo['nombre'], dataImeqmo['precion'], dataImeqmo['precioe'], dataImeqmo['imagen'], dataImeqmo['subtotale'])
 
 #print("\nMACROSISTEMAS")
-#macrosistemas = macrosistemas_Scraper("https://www.macrosistemas.com/productos/memorias/memorias-ram/brocs,-memoria-ddr4-de-8gb-para-pc,-bus-pc3200,-3-a%C3%B1os-de-garantia-detail", "2")
+#macrosistemas = macrosistemas_Scraper("http://www.macrosistemas.com/productos/memorias/memorias-ram/brocs,-memoria-ddr4-de-8gb-para-pc,-bus-pc3200,-3-a%C3%B1os-de-garantia-detail", "2")
 #dataMacro = macrosistemas.getProducto()
 #print(dataMacro['nombre'], dataMacro['precion'], dataMacro['precioe'], dataMacro['imagen'], dataMacro['subtotale'])
