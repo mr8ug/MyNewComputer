@@ -49,7 +49,7 @@ class intelaf_Scraper():
 
     def getProducto(self):
         self.getData()
-        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",",""))
+        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",","")) * float(self.cantidad)
         producto={
             'nombre':self.nombre, 
             'precion':self.precion, 
@@ -113,7 +113,7 @@ class imeqmo_Scraper():
 
     def getProducto(self):
         self.getData()
-        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",",""))
+        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",","")) * float(self.cantidad)
         producto={
             'nombre':self.nombre, 
             'precion':self.precion, 
@@ -171,7 +171,7 @@ class macrosistemas_Scraper():
 
     def getProducto(self):
         self.getData()
-        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",",""))
+        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",","")) * float(self.cantidad)
         producto={
             'nombre':self.nombre, 
             'precion':self.precion, 
