@@ -23,29 +23,29 @@ class intelaf_Scraper():
 
         response = requests.get(self.url)
 
-        html  = BeautifulSoup(response.text, 'html.parser')
+        html  = BeautifulSoup(response.text, 'html5lib')
 
         nombre = html.find('h1', class_='descripcion_p')
         #self.nombre = nombre.text
-        self.nombre=str(nombre).replace("<h1 class=\"descripcion_p\">","").replace("</h1>","").rstrip("\n")
+        self.nombre=nombre.string
         
-        precion = html.find('p', class_="precio_normal")
-        self.precion = str(precion).replace("<p class=\"precio_normal\"> Precio normal <strong> Q","").replace("</strong></p>","").strip()
+        precion = html.find('div', class_="col-xs-12 col-md-7 detalle_venta")
+        self.precion = str(precion.contents[3].text).replace('Precio normal Q','')
 
         precioe = html.find('p',class_="beneficio_efectivo")
         precioe = str(precioe).replace("<p class=\"beneficio_efectivo\" style=\"color: darkorange; font-weight: bold;\"> Beneficio Efectivo","").replace("</p>","").strip()
         precioe = str(precioe).split("Q")
-        self.precioe = str(precioe[1])
+        self.precioe = str(precion.contents[6].text).replace('Beneficio Efectivo Q','')
 
 
         self.subtotaln = str( float(str(self.precion).replace(",","")) * float(self.cantidad) )
 
         self.subtotale = str( float(str(self.precioe).replace(",","")) * float(self.cantidad) )
 
-        img = html.find('div',class_="col-xs-12 col-md-6")
+        img = html.find('div',class_="col-xs-12 col-md-5")
         img = img.attrs['style'].split("url(\"")
         img = img[1].split(".jpg\");")
-        self.imagen = str("https://www.intelaf.com/"+img[0]+'.jpg')
+        self.imagen = str(img[0]+'.jpg')
 
     def getProducto(self):
         self.getData()
@@ -62,6 +62,8 @@ class intelaf_Scraper():
             'link':self.url
         }
         return producto
+
+    
 
 ############IMEQMO##################################################################################################
 
