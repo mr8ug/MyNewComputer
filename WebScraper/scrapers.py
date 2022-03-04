@@ -30,12 +30,18 @@ class intelaf_Scraper():
         self.nombre=nombre.string
         
         precion = html.find('div', class_="col-xs-12 col-md-7 detalle_venta")
-        self.precion = str(precion.contents[3].text).replace('Precio normal Q','')
+        for attr in precion.contents:
+            if attr.text.startswith('Precio normal Q'):
+                self.precion = str(attr.text).replace('Precio normal Q','')
 
-        precioe = html.find('p',class_="beneficio_efectivo")
-        precioe = str(precioe).replace("<p class=\"beneficio_efectivo\" style=\"color: darkorange; font-weight: bold;\"> Beneficio Efectivo","").replace("</p>","").strip()
-        precioe = str(precioe).split("Q")
-        self.precioe = str(precion.contents[6].text).replace('Beneficio Efectivo Q','')
+            if attr.text.startswith('Beneficio Efectivo Q'):
+                self.precioe = str(attr.text).replace('Beneficio Efectivo Q','')
+        #self.precion = str(precion.contents[3].text).replace('Precio normal Q','')
+
+        #precioe = html.find('p',class_="beneficio_efectivo")
+        #precioe = str(precioe).replace("<p class=\"beneficio_efectivo\" style=\"color: darkorange; font-weight: bold;\"> Beneficio Efectivo","").replace("</p>","").strip()
+        #precioe = str(precioe).split("Q")
+        #self.precioe = str(precion.contents[6].text).replace('Beneficio Efectivo Q','')
 
 
         self.subtotaln = str( float(str(self.precion).replace(",","")) * float(self.cantidad) )
@@ -49,7 +55,7 @@ class intelaf_Scraper():
 
     def getProducto(self):
         self.getData()
-        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",","")) * float(self.cantidad)
+        self.descuento = (float(str(self.subtotaln).replace(",","")) - float(str(self.subtotale).replace(",",""))) * float(self.cantidad)
         producto={
             'nombre':self.nombre, 
             'precion':self.precion, 
@@ -115,7 +121,7 @@ class imeqmo_Scraper():
 
     def getProducto(self):
         self.getData()
-        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",","")) * float(self.cantidad)
+        self.descuento = (float(str(self.subtotaln).replace(",","")) - float(str(self.subtotale).replace(",",""))) * float(self.cantidad)
         producto={
             'nombre':self.nombre, 
             'precion':self.precion, 
@@ -173,7 +179,7 @@ class macrosistemas_Scraper():
 
     def getProducto(self):
         self.getData()
-        self.descuento = float(str(self.precion).replace(",","")) - float(str(self.precioe).replace(",","")) * float(self.cantidad)
+        self.descuento = (float(str(self.subtotaln).replace(",","")) - float(str(self.subtotale).replace(",",""))) * float(self.cantidad)
         producto={
             'nombre':self.nombre, 
             'precion':self.precion, 
@@ -190,7 +196,7 @@ class macrosistemas_Scraper():
 
 
 #print("\nINTELAF")
-#intelaf = intelaf_Scraper("https://www.intelaf.com/precios_stock_detallado.aspx?codigo=CAM-NXT-SMW4U2", "2")
+#intelaf = intelaf_Scraper("https://www.intelaf.com/precios_stock_detallado.aspx?codigo=SSD-KN-NV11TM2", "2")
 #dataIntelaf = intelaf.getProducto()
 #print(dataIntelaf['nombre'], dataIntelaf['precion'], dataIntelaf['precioe'], dataIntelaf['imagen'])
 

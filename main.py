@@ -65,7 +65,7 @@ try:
         else:
             listaLinks.append([str(request.form.get("disco")),str(request.form.get("discoCantidad"))])
 
-        if (request.form.get("ramCantidad")=='' or request.form.get("ramCantidad")==0):
+        if (request.form.get("ramCantidad")=='' or request.form.get("ramCantidad")=='0'):
             listaLinks.append([str(request.form.get("ram")),"1"])
         else:
             listaLinks.append([str(request.form.get("ram")),str(request.form.get("ramCantidad"))])
@@ -81,6 +81,8 @@ try:
 
         listaLinks.append([str(request.form.get("video")),'1'])
         listaLinks.append([str(request.form.get("case")),'1'])
+
+        listaLinks.append([str(request.form.get("pasta")),'1'])
         
         
         c = rec(listaLinks)
